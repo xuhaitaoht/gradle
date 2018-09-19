@@ -18,9 +18,11 @@ package org.gradle.smoketests
 
 import org.eclipse.jgit.api.Git
 import org.gradle.integtests.fixtures.executer.IntegrationTestBuildContext
+import spock.lang.Ignore
 
 class KotlinCachingSmokeTest extends AbstractSmokeTest {
 
+    @Ignore("unit we have a build scan plugin 2.0 RC")
     def "can cache Spek framework build"() {
         def testRepoUri = "https://github.com/gradle/kotlin-relocation-test"
         def testRepoBranch = "master"

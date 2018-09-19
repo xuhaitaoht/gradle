@@ -16,6 +16,7 @@
 
 package org.gradle.smoketests
 
+import spock.lang.Ignore
 import spock.lang.Issue
 import spock.lang.Unroll
 
@@ -46,6 +47,7 @@ class NebulaPluginsSmokeTest extends AbstractSmokeTest {
         runner('build').build()
     }
 
+    @Ignore("unit we have a build scan plugin 2.0 RC")
     @Issue('https://plugins.gradle.org/plugin/nebula.plugin-plugin')
     def 'nebula plugin plugin'() {
         when:
