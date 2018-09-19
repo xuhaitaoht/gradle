@@ -162,6 +162,7 @@ class BuildScanFailureMessageHintIntegrationTest extends AbstractPluginIntegrati
         DUMMY_TASK_AND_BUILD_SCAN | true
     }
 
+    @Ignore("unit we have a build scan plugin 2.0 RC")
     def "renders hint for failing build if build scan plugin was applied in plugins DSL is configured to always publish"() {
         given:
         buildFile << appliedBuildScanPluginInPluginsDsl()
