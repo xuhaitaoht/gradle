@@ -18,6 +18,7 @@ package org.gradle.smoketests
 
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
+import spock.lang.Ignore
 import spock.lang.Unroll
 
 class BuildScanPluginSmokeTest extends AbstractSmokeTest {
@@ -38,13 +39,13 @@ class BuildScanPluginSmokeTest extends AbstractSmokeTest {
     private static final List<String> GRACEFULLY_UNSUPPORTED_WITHOUT_FAILURE = [
         "1.11",
         "1.12",
-        "1.12.1"
-    ]
-
-    private static final List<String> SUPPORTED = [
+        "1.12.1",
         "1.13",
         "1.13.1",
-        "1.13.2",
+        "1.13.2"
+    ]
+
+    private static final List<String> GRACEFULLY_UNSUPPORTED_WITHOUT_FAILURE_2 = [
         "1.13.3",
         "1.13.4",
         "1.14",
@@ -53,7 +54,10 @@ class BuildScanPluginSmokeTest extends AbstractSmokeTest {
         "1.16"
     ]
 
+    private static final List<String> SUPPORTED = []
+
     @Unroll
+    @Ignore("until we get build scan plugin 2.0 out")
     "can run build with build scan plugin #version"() {
         when:
         usePluginVersion version
@@ -85,12 +89,27 @@ class BuildScanPluginSmokeTest extends AbstractSmokeTest {
         then:
         buildAndFail("--scan").output.contains("""
 > Failed to apply plugin [id 'com.gradle.build-scan']
-   > This version of Gradle requires version 1.13.0 of the build scan plugin or later.
+   > This version of Gradle requires version 2.0.0 of the build scan plugin or later.
      Please see https://gradle.com/scans/help/gradle-incompatible-plugin-version for more information.
 """)
 
         where:
         version << GRACEFULLY_UNSUPPORTED
+    }
+
+    @Unroll
+    "succeeds without capturing scan with unsupported version #version"() {
+        when:
+        usePluginVersion version
+
+        then:
+        build("--scan").output.contains("""
+This version of Gradle requires version 2.0.0 of the build scan plugin or later.
+Please see https://gradle.com/scans/help/gradle-incompatible-plugin-version for more information.
+""")
+
+        where:
+        version << GRACEFULLY_UNSUPPORTED_WITHOUT_FAILURE_2
     }
 
     BuildResult build(String... args) {
