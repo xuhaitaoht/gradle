@@ -20,6 +20,7 @@ import org.gradle.integtests.fixtures.AbstractPluginIntegrationTest
 import org.gradle.plugin.management.internal.autoapply.AutoAppliedBuildScanPlugin
 import org.gradle.util.Requires
 import org.gradle.util.TestPrecondition
+import spock.lang.Ignore
 import spock.lang.Issue
 import spock.lang.Unroll
 
@@ -52,6 +53,7 @@ class BuildScanFailureMessageHintIntegrationTest extends AbstractPluginIntegrati
     }
 
     @Unroll
+    @Ignore("unit we have a build scan plugin 2.0 RC")
     def "renders hint for failing build without applied build scan plugin and #description"() {
         given:
         buildFile << failingBuildFile()
@@ -74,6 +76,7 @@ class BuildScanFailureMessageHintIntegrationTest extends AbstractPluginIntegrati
         ["-$LogLevelOption.QUIET_SHORT_OPTION"]             | 'quiet'
     }
 
+    @Ignore("unit we have a build scan plugin 2.0 RC")
     def "always renders hint for failing build if build scan plugin was applied in plugins DSL and not requested for generation"() {
         given:
         buildFile << appliedBuildScanPluginInPluginsDsl()
@@ -93,6 +96,7 @@ class BuildScanFailureMessageHintIntegrationTest extends AbstractPluginIntegrati
         DUMMY_TASK_AND_BUILD_SCAN | true
     }
 
+    @Ignore("unit we have a build scan plugin 2.0 RC")
     def "always renders hint for failing build if build scan plugin was applied in buildscript and not requested for generation"() {
         given:
         buildFile << appliedBuildScanPluginInBuildScript()
@@ -112,6 +116,7 @@ class BuildScanFailureMessageHintIntegrationTest extends AbstractPluginIntegrati
         DUMMY_TASK_AND_BUILD_SCAN | true
     }
 
+    @Ignore("unit we have a build scan plugin 2.0 RC")
     def "always renders hint for failing build if build scan plugin was applied in initscript and not requested for generation"() {
         given:
         def initScriptFileName = 'init.gradle'
@@ -133,6 +138,7 @@ class BuildScanFailureMessageHintIntegrationTest extends AbstractPluginIntegrati
         DUMMY_TASK_AND_BUILD_SCAN | true
     }
 
+    @Ignore("unit we have a build scan plugin 2.0 RC")
     def "always hint for failing build if build scan plugin was applied in script plugin and not requested for generation"() {
         given:
         def scriptPluginFileName = 'scan.gradle'
