@@ -21,7 +21,9 @@ import org.gradle.integtests.fixtures.AbstractContinuousIntegrationTest
 import org.gradle.internal.deployment.RunApplication
 import org.gradle.internal.scan.config.fixtures.BuildScanPluginFixture
 import org.gradle.test.fixtures.file.TestFile
+import spock.lang.Ignore
 
+@Ignore("unit we have a build scan plugin 2.0 RC")
 class BuildScanContinuousBuildCompatibilityIntegrationTest extends AbstractContinuousIntegrationTest {
 
     def fixture = new BuildScanPluginFixture(testDirectory, mavenRepo, createExecuter())
